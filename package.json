@@ -1,0 +1,35 @@
+{
+  "name": "given-test",
+  "version": "1.0.0",
+  "description": "lazy variable execution for javascript test frameworks",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint -c .eslintrc.js ./src ./test",
+    "lint:fix": "eslint -c .eslintrc.js --fix ./src",
+    "test": "npm-run-all --aggregate-output --continue-on-error --parallel --print-label test:**",
+    "test:unit": "jest test/unit/**.spec.js --color",
+    "test:integration:jest": "jest test/integration/jest/**.test.js --color",
+    "test:integration:mocha": "mocha test/integration/mocha/**.test.js --color"
+  },
+  "keywords": [
+    "jest",
+    "given",
+    "let",
+    "test",
+    "rspec"
+  ],
+  "author": "Mason Boeman",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jasmine": "^4.1.0",
+    "eslint-plugin-jest": "^23.2.0",
+    "eslint-plugin-mocha": "^6.2.2",
+    "jasmine": "^3.5.0",
+    "jest": "^24.9.0",
+    "mocha": "^6.2.2",
+    "npm-run-all": "^4.1.5"
+  }
+}
