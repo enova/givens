@@ -1,0 +1,56 @@
+{
+  "name": "givens",
+  "version": "1.0.0",
+  "description": "Easy test setup without side effects",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "setup.js"
+  ],
+  "scripts": {
+    "tsc": "tsc",
+    "lint": "eslint ./src/**.* --ext .ts",
+    "lint:fix": "eslint -c .eslintrc.js --fix ./src",
+    "test": "npm-run-all --aggregate-output --continue-on-error --parallel --print-label test:**",
+    "test:unit:jest": "jest test/unit/jest/**.spec.js --color",
+    "test:unit:mocha": "mocha test/unit/mocha/**.spec.js --color",
+    "test:integration:jest": "jest test/integration/jest/**.test.js --color",
+    "test:integration:mocha": "mocha test/integration/mocha/**.test.js --color"
+  },
+  "keywords": [
+    "jest",
+    "given",
+    "let",
+    "test",
+    "rspec"
+  ],
+  "author": "Mason Boeman",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-airbnb-typescript": "^6.3.1",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jasmine": "^4.1.0",
+    "eslint-plugin-jest": "^23.2.0",
+    "eslint-plugin-mocha": "^6.2.2",
+    "jasmine": "^3.5.0",
+    "jest": "^24.9.0",
+    "mocha": "^6.2.2",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^3.7.4"
+  },
+  "eslintConfig": {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "airbnb-typescript/base"
+    ]
+  }
+}

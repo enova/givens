@@ -1,0 +1,11 @@
+{
+    "editor.tabSize": 2,
+    "mochaExplorer.files": [
+        "test/integration/mocha/**.test.js"
+    ],
+    "eslint.enable": true,
+    "eslint.validate": [
+        "javascript",
+        "typescript"
+    ]
+}
