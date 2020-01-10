@@ -1,12 +1,12 @@
 /* global window:readonly */
 
-const given = require('./index.js');
+const getGiven = require('./dist/given.js').default;
 
 // register global object
 if (typeof global !== 'undefined') {
-  global.given = given;
+  global.given = getGiven();
 }
 
 if (typeof window !== 'undefined') {
-  window.given = given;
+  window.given = getGiven();
 }

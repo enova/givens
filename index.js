@@ -1,1 +1,1 @@
-module.exports = require('./src/given.js');
+module.exports = require('./dist/given.js').default();
