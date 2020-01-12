@@ -22,10 +22,13 @@ const evaluate = <T, K extends keyof T>(
 
     // check for recursive definition, and error if present
     if (trace.includes(key)) {
-      const t = [...trace, key];
+      const partialTrace = [
+        ...trace.slice(trace.indexOf(key)),
+        key,
+      ];
       trace.length = 0; // reset trace
 
-      throw new GivenError(`recursive variable ${key} detected\ntrace: ${t.join(' => ')}`, ssi);
+      throw new GivenError(`recursive variable ${key} detected\ntrace: ${partialTrace.join(' => ')}`, ssi);
     }
 
     // try to evaluate and cache
