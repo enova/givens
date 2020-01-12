@@ -1,5 +1,5 @@
 const assert = require('assert');
-const given = require('../../../index.js');
+const given = require('../../../dist/getGiven').default();
 
 describe('thingToDescribe', () => {
   given('variableToLazyExecute', () => 'initial value');

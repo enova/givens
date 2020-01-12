@@ -1,6 +1,5 @@
-/* global window:readonly */
-
-const getGiven = require('./dist/given.js').default;
+/* eslint-disable no-undef */
+const getGiven = require('./dist/getGiven').default;
 
 // register global object
 if (typeof global !== 'undefined') {

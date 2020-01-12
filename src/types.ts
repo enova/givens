@@ -6,8 +6,8 @@ export type givenCache<T> = Partial<T>;
 
 export type givenTrace<T> = (keyof T)[];
 
-interface givenFunc<T> {
+export interface givenFunc<T> {
   <K extends keyof T>(key: K, func: () => T[K]): void
 }
 
-export type given<T> = givenFunc<T> & T
+export type given<T> = givenFunc<T> & T;

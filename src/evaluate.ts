@@ -1,8 +1,11 @@
+/* eslint-disable no-param-reassign */
+
 import {
-  givenProps,
   givenCache,
+  givenProps,
   givenTrace,
-} from './types'
+} from './types';
+import GivenError from './givenError';
 
 const evaluate = <T, K extends keyof T>(
   key: K,
@@ -21,10 +24,9 @@ const evaluate = <T, K extends keyof T>(
       const t = trace;
       trace.length = 0; // reset trace
 
-      throw new Error(`given-test: recursive variable ${key} detected\ntrace: ${t}`);
+      throw new GivenError(`recursive variable ${key} detected\ntrace: ${t}`);
     }
 
-    
     // try to evaluate and cache
     try {
       trace.push(key);
@@ -37,6 +39,6 @@ const evaluate = <T, K extends keyof T>(
     }
   }
   return value!;
-}
+};
 
 export default evaluate;
