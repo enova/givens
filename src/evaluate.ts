@@ -12,6 +12,7 @@ const evaluate = <T, K extends keyof T>(
   props: givenProps<T>,
   cache: givenCache<T>,
   trace: givenTrace<T>,
+  ssi: Function,
 ): T[K] => {
   let value = cache[key];
 
@@ -24,7 +25,7 @@ const evaluate = <T, K extends keyof T>(
       const t = trace;
       trace.length = 0; // reset trace
 
-      throw new GivenError(`recursive variable ${key} detected\ntrace: ${t}`);
+      throw new GivenError(`recursive variable ${key} detected\ntrace: ${t}`, ssi);
     }
 
     // try to evaluate and cache

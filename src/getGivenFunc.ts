@@ -25,8 +25,11 @@ const getGivenFunc = () => {
       // eslint-disable-next-line no-prototype-builtins
       if (!given.hasOwnProperty(key)) {
         props[key] = [];
+
+        // make sure to pass the correct ssi for easier debugging
+        const getter = () => evaluate<T, K>(key, props, cache, trace, getter);
         Object.defineProperty(given, key, {
-          get: () => evaluate<T, K>(key, props, cache, trace),
+          get: getter,
           configurable: true,
           enumerable: true,
         });
