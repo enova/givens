@@ -6,9 +6,15 @@ import {
 import evaluate from './evaluate';
 import isValid from './isValid';
 import GivenError from './givenError';
+import getContextInfo from './getContextInfo';
 
 const getGivenFunc = () => {
   const given = <T, K extends keyof T>(key: K, func: () => T[K]): void => {
+    const contextInfo = getContextInfo();
+    if (contextInfo === 'lifecycle' || contextInfo === 'test') {
+      throw new GivenError('cannot call given from test or lifecycle method', given);
+    }
+
     if (!isValid(key as string)) {
       throw new GivenError(`key "${key}" is not allowed`, given);
     }

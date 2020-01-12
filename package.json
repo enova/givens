@@ -9,7 +9,8 @@
     "lint": "eslint ./src/**.* --ext .ts",
     "lint:fix": "eslint -c .eslintrc.js --fix ./src",
     "test": "npm-run-all --aggregate-output --continue-on-error --parallel --print-label test:**",
-    "test:unit": "jest test/unit/**.spec.js --color",
+    "test:unit:jest": "jest test/unit/jest/**.spec.js --color",
+    "test:unit:mocha": "mocha test/unit/mocha/**.spec.js --color",
     "test:integration:jest": "jest test/integration/jest/**.test.js --color",
     "test:integration:mocha": "mocha test/integration/mocha/**.test.js --color"
   },

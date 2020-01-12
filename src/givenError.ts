@@ -8,7 +8,7 @@
 export default class GivenError extends Error {
   constructor(message: string, ssf?: Function) {
     // 'Error' breaks prototype chain here
-    super(`given-test: ${message}`);
+    super(`givens: ${message}`);
 
     // restore prototype chain
     const actualProto = new.target.prototype;
