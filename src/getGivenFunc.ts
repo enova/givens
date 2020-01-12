@@ -65,14 +65,14 @@ const getGivenFunc = () => {
       beforeAll(push);
     }
     if (typeof before === 'function') {
-      before(`given-test setup ${key}`, push);
+      before(`givens setup ${key}`, push);
     }
 
     if (typeof afterAll === 'function') {
       afterAll(pop);
     }
     if (typeof after === 'function') {
-      after(`given-test teardown ${key}`, pop);
+      after(`givens teardown ${key}`, pop);
     }
 
     if (typeof afterEach === 'function') {

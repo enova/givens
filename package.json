@@ -1,5 +1,5 @@
 {
-  "name": "given-test",
+  "name": "givens",
   "version": "1.0.0",
   "description": "lazy variable execution for javascript test frameworks",
   "main": "dist/index.js",
