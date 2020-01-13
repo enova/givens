@@ -1,9 +1,13 @@
 {
   "name": "givens",
   "version": "1.0.0",
-  "description": "lazy variable execution for javascript test frameworks",
+  "description": "Easy test setup without side effects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "setup.js"
+  ],
   "scripts": {
     "tsc": "tsc",
     "lint": "eslint ./src/**.* --ext .ts",
