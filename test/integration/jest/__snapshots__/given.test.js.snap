@@ -1,6 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`with recursive given variables blows up: recursive variables error 1`] = `
-"givens: recursive variable recursive1 detected
-trace: recursive1 => recursive2 => recursive1"
-`;
