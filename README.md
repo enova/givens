@@ -5,31 +5,26 @@ heavily inspired by https://github.com/tatyshev/given2, which was inspired by rs
 
 usage:
 
-    describe('thingToDescribe', () => {
-      given('variableToLazyExecute', () => 'initial value');
+```javascript
+describe('basic overriding behavior', () => {
+  given('var1', () => 'initial value');
 
-      given('anotherVarToLazyExecute', () => {
-        return 'the value is: ' + given.variableToLazyExecute;
-      });
+  given('var2', () => `the value is: ${given.var1}`);
 
-      it('has initial value', () => {
-        expect(given.anotherVarToLazyExecute).toEqual('the value is: initial value');
-      });
+  it('has initial value', () => {
+    expect(given.var2).toEqual('the value is: initial value');
+  });
 
-      describe('with new value', () => {
-        given('variableToLazyExecute', () => 'overridden value');
+  describe('with new value', () => {
+    given('var1', () => 'overridden value');
 
-        it('has overridden value', () => {
-          expect(given.anotherVarToLazyExecute).toEqual('the value is: overridden value');
-        });
-      });
-
-      it('has initial value again', () => {
-        expect(given.anotherVarToLazyExecute).toEqual('the value is: initial value');
-      });
-
-      if('can be invoked by calling resolve', () => {
-        given.resolve('anotherVarToLazyExecute'));
-        // the value has been calculated and cached here
-      });
+    it('has overridden value', () => {
+      expect(given.var2).toEqual('the value is: overridden value');
     });
+  });
+
+  it('has initial value again', () => {
+    expect(given.var2).toEqual('the value is: initial value');
+  });
+});
+```
