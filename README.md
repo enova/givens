@@ -8,9 +8,9 @@ For use with [jest](https://github.com/facebook/jest) and [mocha](https://github
 Behavior based on [rspec](), syntax inspired by [given2](https://github.com/tatyshev/given2)
 
 Common testing side effects include but are not limited to:
-- testing the same object in multiple tests can result in cross-contamination.
+- testing different methods on the same object in multiple tests can result in cross-contamination.
 - tests can depend on order; and break when reordered.
-- appending "`.skip`" or "`.only`" can make tests behave unpredictably.
+- appending `.skip` or `.only` can make tests behave unpredictably.
 
 Givens, when used correctly solves all of these, dries up your tests, and might even make them more readable, while still letting you use standard lifecycle methods like `beforeEach`.
 
