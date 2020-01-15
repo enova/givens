@@ -36,7 +36,7 @@ or add to testing framework config, for example in jest:
 ```javascript
 {
   setupFiles: [
-    'given/setup.js',
+    'givens/setup.js',
   ],
 }
 ```
