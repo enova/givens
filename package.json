@@ -4,6 +4,7 @@
   "description": "Easy test setup without side effects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": "github:enova/givens",
   "files": [
     "dist",
     "setup.js"
