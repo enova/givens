@@ -9,7 +9,7 @@
     "setup.js"
   ],
   "scripts": {
-    "tsc": "tsc",
+    "build": "tsc",
     "lint": "eslint ./src/**.* --ext .ts",
     "lint:fix": "eslint -c .eslintrc.js --fix ./src",
     "test": "npm-run-all --aggregate-output --continue-on-error --parallel --print-label test:**",
