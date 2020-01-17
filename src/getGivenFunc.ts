@@ -60,21 +60,23 @@ const getGivenFunc = () => {
     const clearCache = () => {
       delete cache[key];
     };
-
+    /* istanbul ignore next */
     if (typeof beforeAll === 'function') {
       beforeAll(push);
     }
+    /* istanbul ignore next */
     if (typeof before === 'function') {
       before(`givens setup ${key}`, push);
     }
-
+    /* istanbul ignore next */
     if (typeof afterAll === 'function') {
       afterAll(pop);
     }
+    /* istanbul ignore next */
     if (typeof after === 'function') {
       after(`givens teardown ${key}`, pop);
     }
-
+    /* istanbul ignore next */
     if (typeof afterEach === 'function') {
       afterEach(clearCache);
     }

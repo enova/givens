@@ -16,7 +16,10 @@ const disallowedProps = [
   '__cache__',
   '__trace__',
   // prototype props
-  ...allProps(() => {}),
+  ...allProps(
+    /* istanbul ignore next */
+    () => {},
+  ),
 ];
 
 const isValid = (key: string): boolean => !disallowedProps.includes(key);

@@ -10,12 +10,12 @@
     "setup.js"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --removeComments",
     "build:tests": "tsc --inlineSourceMap",
     "lint": "eslint ./src/**.* --ext .ts",
     "lint:fix": "eslint -c .eslintrc.js --fix ./src",
     "test": "npm-run-all --aggregate-output --continue-on-error --parallel --print-label test:**",
-    "test:unit:jest": "jest test/unit/jest/**.spec.ts --config jest-unit.config.js --coverage --color",
+    "test:unit:jest": "jest test/unit/jest/**.spec.ts --config jest-unit.config.js --color",
     "test:unit:mocha": "mocha test/unit/mocha/**.spec.js --color",
     "test:integration:jest": "jest test/integration/jest/**.test.js --config jest-integration.config.js --color",
     "test:integration:mocha": "mocha test/integration/mocha/**.test.js --color"
