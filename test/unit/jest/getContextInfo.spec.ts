@@ -1,5 +1,8 @@
+import getContextInfo from '../../../src/getContextInfo';
+
+// we need to use node's assert to test the integrations with jest
+// this is unfortunately unavoidable to test this behavior
 const assert = require('assert');
-const getContextInfo = require('../../../dist/getContextInfo').default;
 
 assert.equal(getContextInfo(), 'normal');
 describe('given inside it', () => {

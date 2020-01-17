@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`evaluate trace detection shows the correct sequence 1`] = `""`;
+
+exports[`evaluate trace detection throws the correct error 1`] = `""`;
