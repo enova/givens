@@ -10,13 +10,14 @@
     "setup.js"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --removeComments",
+    "build:tests": "tsc --inlineSourceMap",
     "lint": "eslint ./src/**.* --ext .ts",
     "lint:fix": "eslint -c .eslintrc.js --fix ./src",
     "test": "npm-run-all --aggregate-output --continue-on-error --parallel --print-label test:**",
-    "test:unit:jest": "jest test/unit/jest/**.spec.js --color",
+    "test:unit:jest": "jest test/unit/jest/**.spec.ts --config jest-unit.config.js --color",
     "test:unit:mocha": "mocha test/unit/mocha/**.spec.js --color",
-    "test:integration:jest": "jest test/integration/jest/**.test.js --color",
+    "test:integration:jest": "jest test/integration/jest/**.test.js --config jest-integration.config.js --color",
     "test:integration:mocha": "mocha test/integration/mocha/**.test.js --color"
   },
   "keywords": [
@@ -29,6 +30,8 @@
   "author": "Mason Boeman",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^24.9.0",
+    "@types/node": "^13.1.7",
     "@typescript-eslint/eslint-plugin": "^2.15.0",
     "@typescript-eslint/parser": "^2.15.0",
     "eslint": "^6.8.0",
@@ -42,6 +45,7 @@
     "jest": "^24.9.0",
     "mocha": "^6.2.2",
     "npm-run-all": "^4.1.5",
+    "ts-jest": "^24.3.0",
     "typescript": "^3.7.4"
   },
   "eslintConfig": {

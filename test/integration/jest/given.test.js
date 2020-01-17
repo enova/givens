@@ -19,3 +19,27 @@ describe('basic overriding behavior', () => {
     expect(given.var2).toEqual('the value is: initial value');
   });
 });
+
+describe('basic caching behavior', () => {
+  given('var', () => ({ value: 'initial' }));
+  given('random', () => Math.random());
+
+  test('it caches value', () => {
+    given.var.value = 'new';
+    expect(given.var.value).toBe('new');
+  });
+
+  test('random cache test', () => {
+    expect(given.random).toEqual(given.random);
+  });
+
+  describe('with beforeEach', () => {
+    beforeEach(() => {
+      given.var.value = 'new';
+    });
+
+    test('it caches value', () => {
+      expect(given.var.value).toBe('new');
+    });
+  });
+});
