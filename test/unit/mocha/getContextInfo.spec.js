@@ -4,12 +4,27 @@ const getContextInfo = require('../../../dist/getContextInfo').default;
 // we need to assert in unusual places in this file.
 // due to the nature of getContextInfo
 assert.equal(getContextInfo(), 'normal');
-describe('given inside it', () => {
+
+describe('getContextInfo', () => {
   assert.equal(getContextInfo(), 'normal');
+
+  before(() => {
+    assert.equal(getContextInfo(), 'lifecycle');
+  });
+
   beforeEach(() => {
     assert.equal(getContextInfo(), 'lifecycle');
   });
-  it('does something', () => {
+
+  afterEach(() => {
+    assert.equal(getContextInfo(), 'lifecycle');
+  });
+
+  after(() => {
+    assert.equal(getContextInfo(), 'lifecycle');
+  });
+
+  it('inside it', () => {
     assert.equal(getContextInfo(), 'test');
   });
 });

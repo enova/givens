@@ -5,12 +5,31 @@ import getContextInfo from '../../../src/getContextInfo';
 const assert = require('assert');
 
 assert.equal(getContextInfo(), 'normal');
-describe('given inside it', () => {
+
+describe('getContextInfo', () => {
   assert.equal(getContextInfo(), 'normal');
+
+  beforeAll(() => {
+    assert.equal(getContextInfo(), 'lifecycle');
+  });
+
   beforeEach(() => {
     assert.equal(getContextInfo(), 'lifecycle');
   });
-  it('does something', () => {
+
+  afterEach(() => {
+    assert.equal(getContextInfo(), 'lifecycle');
+  });
+
+  afterAll(() => {
+    assert.equal(getContextInfo(), 'lifecycle');
+  });
+
+  it('inside it', () => {
+    assert.equal(getContextInfo(), 'test');
+  });
+
+  test('inside test', () => {
     assert.equal(getContextInfo(), 'test');
   });
 });
