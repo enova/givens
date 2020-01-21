@@ -7,7 +7,7 @@ module.exports = {
   collectCoverageFrom: [
     'dist/**/*.js',
   ],
-  setupFiles: [
+  setupFilesAfterEnv: [
     './setup.js',
   ],
 };

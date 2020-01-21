@@ -35,7 +35,7 @@ import 'givens/setup';
 or add to testing framework config, for example in jest:
 ```javascript
 {
-  setupFiles: [
+  setupFilesAfterEnv: [ // this CANNOT be setupFiles
     'givens/setup.js',
   ],
 }
