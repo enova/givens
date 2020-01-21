@@ -1,3 +1,5 @@
+const assert = require('assert');
+
 describe('basic overriding behavior', () => {
   given('var1', () => 'initial value');
 
@@ -40,6 +42,17 @@ describe('basic caching behavior', () => {
 
     test('it caches value', () => {
       expect(given.var.value).toBe('new');
+    });
+  });
+
+  describe('with afterEach', () => {
+    afterEach(() => {
+      assert.equal(given.var.value, 'new');
+    });
+
+    test('it caches value', () => {
+      expect(given.var.value).toBe('initial');
+      given.var.value = 'new';
     });
   });
 });

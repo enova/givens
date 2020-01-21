@@ -56,10 +56,6 @@ const getGivenFunc = () => {
       }
     };
 
-    // remove cached props
-    const clearCache = () => {
-      delete cache[key];
-    };
     /* istanbul ignore next */
     if (typeof beforeAll === 'function') {
       beforeAll(push);
@@ -76,11 +72,18 @@ const getGivenFunc = () => {
     if (typeof after === 'function') {
       after(`givens teardown ${key}`, pop);
     }
-    /* istanbul ignore next */
-    if (typeof afterEach === 'function') {
-      afterEach(clearCache);
-    }
   };
+  /* istanbul ignore next */
+  if (typeof afterEach === 'function') {
+    // clear the cache after every test
+    afterEach(() => {
+      // eslint-disable-next-line no-underscore-dangle
+      const cache = (given as any).__cache__;
+      Object.keys(cache).forEach((key: any) => {
+        delete cache[key];
+      });
+    });
+  }
   return given;
 };
 

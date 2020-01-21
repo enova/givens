@@ -45,4 +45,15 @@ describe('basic caching behavior', () => {
       assert.equal(given.var.value, 'new');
     });
   });
+
+  describe('with afterEach', () => {
+    afterEach(() => {
+      assert.equal(given.var.value, 'new');
+    });
+
+    it('it caches value', () => {
+      assert.equal(given.var.value, 'initial');
+      given.var.value = 'new';
+    });
+  });
 });
