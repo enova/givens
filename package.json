@@ -10,16 +10,20 @@
     "setup.js"
   ],
   "scripts": {
+    "postinstall": "&& cd ../../ && cd integration-tests/mocha && npm i",
     "build": "tsc --removeComments",
-    "build:tests": "tsc --inlineSourceMap",
+    "build:tests": "npm-run-all --continue-on-error build:tests:**",
+    "build:tests:unit": "tsc --inlineSourceMap",
+    "build:tests:jest": "cd integration-tests/jest && npm i",
+    "build:tests:mocha": "cd integration-tests/mocha && npm i",
     "lint": "npm-run-all --continue-on-error lint:**",
     "lint:main": "eslint ./src/**.* ./test/**.* --ext .ts",
     "lint:jest": "cd integration-tests/jest && npm run lint",
     "lint:mocha": "cd integration-tests/mocha && npm run lint",
     "test": "npm-run-all --continue-on-error test:**",
     "test:unit": "jest",
-    "test:jest": "cd integration-tests/jest && npm i && npm test",
-    "test:mocha": "cd integration-tests/mocha && npm i && npm test"
+    "test:jest": "cd integration-tests/jest && npm test",
+    "test:mocha": "cd integration-tests/mocha && npm test"
   },
   "keywords": [
     "jest",
