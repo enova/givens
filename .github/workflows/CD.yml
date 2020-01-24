@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: 12
       - run: npm i
+      - run: npm run install:tests
       - run: npm run build:tests
       - run: npm run lint
       - run: npm test

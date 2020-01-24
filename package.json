@@ -11,9 +11,9 @@
   ],
   "scripts": {
     "prepack": "npm run build",
-    "postinstall": "npm-run-all install:**",
-    "install:tests:jest": "cd integration-tests/jest && npm i",
-    "install:tests:mocha": "cd integration-tests/mocha && npm i",
+    "install:tests": "npm-run-all install:tests:**",
+    "install:tests:jest": "cd integration-tests/jest && npm i --no-package-lock",
+    "install:tests:mocha": "cd integration-tests/mocha && npm i --no-package-lock",
     "build": "tsc --removeComments",
     "build:tests": "tsc --inlineSourceMap",
     "lint": "npm-run-all --continue-on-error lint:**",
