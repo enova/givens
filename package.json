@@ -10,6 +10,7 @@
     "setup.js"
   ],
   "scripts": {
+    "prepack": "npm run build",
     "postinstall": "npm-run-all install:**",
     "install:tests:jest": "cd integration-tests/jest && npm i",
     "install:tests:mocha": "cd integration-tests/mocha && npm i",
