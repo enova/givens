@@ -1,5 +1,5 @@
 const assert = require('assert');
-const given = require('../../../dist/getGiven').default();
+const given = require('givens').default();
 
 describe('illegal prop', () => {
   assert.throws(
