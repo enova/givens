@@ -1,14 +1,15 @@
-const assert = require('assert');
-const getContextInfo = require('../../../dist/getContextInfo').default;
+import getContextInfo from '../src/getContextInfo';
 
-// we need to assert in unusual places in this file.
-// due to the nature of getContextInfo
+// we need to use node's assert to test the integrations with jest
+// this is unfortunately unavoidable to test this behavior
+const assert = require('assert');
+
 assert.equal(getContextInfo(), 'normal');
 
 describe('getContextInfo', () => {
   assert.equal(getContextInfo(), 'normal');
 
-  before(() => {
+  beforeAll(() => {
     assert.equal(getContextInfo(), 'lifecycle');
   });
 
@@ -20,11 +21,15 @@ describe('getContextInfo', () => {
     assert.equal(getContextInfo(), 'lifecycle');
   });
 
-  after(() => {
+  afterAll(() => {
     assert.equal(getContextInfo(), 'lifecycle');
   });
 
   it('inside it', () => {
+    assert.equal(getContextInfo(), 'test');
+  });
+
+  test('inside test', () => {
     assert.equal(getContextInfo(), 'test');
   });
 });

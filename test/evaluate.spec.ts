@@ -1,14 +1,14 @@
-import GivenError from '../../../src/givenError';
-import evaluate from '../../../src/evaluate';
+import GivenError from '../src/givenError';
+import evaluate from '../src/evaluate';
 import {
   givenProps,
   givenCache,
   givenTrace,
-} from '../../../src/types';
+} from '../src/types';
 import 'jest';
 
 const mockedGivenError = GivenError as unknown as jest.Mock<typeof GivenError>;
-jest.mock('../../../src/givenError');
+jest.mock('../src/givenError');
 beforeEach(() => { mockedGivenError.mockClear(); });
 
 interface testType {
