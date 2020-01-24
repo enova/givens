@@ -1,22 +1,47 @@
 <p align="center">
   <img src="/documentation/logo-light.png" alt="givens" width="300">
+  <br />
+  <br />
+  <img alt="npm" src="https://img.shields.io/npm/v/givens">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/enova/givens/CI?label=tests">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/enova/givens/CD?label=build">
+  <img alt="GitHub" src="https://img.shields.io/github/license/enova/givens">
 </p>
 
 Easy test setup without side effects.
 
 For use with [jest](https://github.com/facebook/jest) and [mocha](https://github.com/mochajs/mocha).
-Behavior based on [rspec](), syntax inspired by [given2](https://github.com/tatyshev/given2)
-
-Common testing side effects include but are not limited to:
-- testing different methods on the same object in multiple tests can result in cross-contamination.
-- tests can depend on order; and break when reordered.
-- appending `.skip` or `.only` can make tests behave unpredictably.
-
-Givens, when used correctly solves all of these, dries up your tests, and might even make them more readable, while still letting you use standard lifecycle methods like `beforeEach`.
+Behavior based on [rspec](https://github.com/enova/givens/blob/master), syntax inspired by [given2](https://github.com/tatyshev/given2)
 
 ---
+
+## Why?
+
+If you or your team have ruby and rspec experience, and are moving to a javascript based library, this will make the experience of writing javascript tests very similar to that of writing rspec tests.
+
+Even if you don't come from a ruby background, givens can help you write maintainable tests quickly, while avoiding many of the side effects traditional JavaScript testing often has, such as:
+
+- testing different methods on the same object in multiple tests can result in cross-contamination.
+- tests can depend on order; and break when reordered.
+- Running only some tests in a single file (like via jest’s `.skip` or `.only`) can make tests behave unpredictably.
+
+Givens, when used correctly solves all of these, dries up your tests, and might even make them more readable, while still letting you use `beforeEach` and `afterEach`.
+
+---
+
+## What does it do?
+
+when you call `getGiven()`, givens calls `afterEach` with a callback that clears the cache. Because this `afterEach` hook is declared first, it will run after every other `afterEach` in every scope.
+
+when you call `given(key, callback)`, givens calls the following lifecycle functions:
+
+- `beforeAll`, with a hook which pushes `callback` onto a stack of functions for `key` and makes sure there is an accessor present for key, which simply calls the topmost function on the stack and returns the result.
+- `afterAll`, with a hook which pops `callback` back off the stack of functions for `key`, and deletes the accessor if the stack is now empty.
+
 ## Getting Started
+
 ### Prerequisites
+
 This package should work fine for any javascript or typescript project that uses jest or mocha tests. Non Node environments are untested, and may not work.
 
 ### Installing
@@ -60,7 +85,7 @@ const given = getGiven<myVars>();
 ---
 ## Usage
 
-When you call `given(myKey, callback)`, givens stores the callback function you give it. When you go to retrieve the key (via `given.myKey`) givens will execute the most recent callback you have given for the key, and cache the value. Additionally, if you call `given()` inside a describe, the callback will revert to the previous one given for `myKey` after executing all tests in the describe. The cache is cleared after every test.
+When you call `given(myKey, callback)`, givens stores the callback function you give it. When you go to retrieve the key (via `given.myKey`) givens will execute the most recent callback you have given for the key, and cache the value. Additionally, if you call `given()` inside a describe, the callback will revert to the previous one given for `myKey` after executing all tests in the describe, allowing you to override a given value for a set of tests. The cache is cleared after every test.
 
 ```javascript
 describe('basic overriding behavior', () => {
