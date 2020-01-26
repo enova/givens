@@ -1,15 +1,16 @@
-import GivenError from '../src/givenError';
 import evaluate from '../src/evaluate';
 import {
   givenProps,
   givenCache,
   givenTrace,
 } from '../src/types';
-import 'jest';
+import GivenError from '../src/givenError';
 
+jest.unmock('../src/evaluate');
 const mockedGivenError = GivenError as unknown as jest.Mock<typeof GivenError>;
-jest.mock('../src/givenError');
-beforeEach(() => { mockedGivenError.mockClear(); });
+mockedGivenError.mockImplementation(
+  (message: string) => (new Error(message) as unknown as typeof GivenError),
+);
 
 interface testType {
   key1: string;

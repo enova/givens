@@ -1,4 +1,5 @@
 module.exports = {
+  automock: true,
   verbose: true,
   roots: [
     '<rootDir>/src',

@@ -1,6 +1,8 @@
 import getContextInfo from '../src/getContextInfo';
 
-// we need to use node's assert to test the integrations with jest
+jest.unmock('../src/getContextInfo');
+
+// we need to use node's assert to test the interactions with jest
 // this is unfortunately unavoidable to test this behavior
 const assert = require('assert');
 
