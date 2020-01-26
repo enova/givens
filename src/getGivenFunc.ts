@@ -19,11 +19,9 @@ const getGivenFunc = () => {
       throw new GivenError(`key "${key}" is not allowed`, given);
     }
 
-    /* eslint-disable no-underscore-dangle */
     const props = (given as any).__props__ as givenProps<T>;
     const cache = (given as any).__cache__ as givenCache<T>;
     const trace = (given as any).__trace__ as givenTrace<T>;
-    /* eslint-enable no-underscore-dangle */
 
     // push function onto prop stack
     const push = () => {
@@ -77,7 +75,6 @@ const getGivenFunc = () => {
   if (typeof afterEach === 'function') {
     // clear the cache after every test
     afterEach(() => {
-      // eslint-disable-next-line no-underscore-dangle
       const cache = (given as any).__cache__;
       Object.keys(cache).forEach((key: any) => {
         delete cache[key];
