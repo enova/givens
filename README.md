@@ -3,8 +3,9 @@
   <br />
   <br />
   <img alt="npm" src="https://img.shields.io/npm/v/givens">
-  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/enova/givens/CI?label=tests">
   <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/enova/givens/CD?label=build">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/enova/givens/CI?label=tests">
+  <a href='https://coveralls.io/github/enova/givens?branch=master'><img src='https://coveralls.io/repos/github/enova/givens/badge.svg?branch=master' alt='Coverage Status' /></a>
   <img alt="GitHub" src="https://img.shields.io/github/license/enova/givens">
 </p>
 
