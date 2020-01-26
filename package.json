@@ -2,8 +2,8 @@
   "name": "givens",
   "version": "1.1.2",
   "description": "Easy test setup without side effects",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/getGiven.js",
+  "types": "dist/getGiven.d.ts",
   "repository": "github:enova/givens",
   "files": [
     "dist",
