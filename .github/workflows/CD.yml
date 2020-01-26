@@ -9,25 +9,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm i
-      - run: npm run install:tests
-      - run: npm run build:tests
-      - run: npm run lint
-      - run: npm test
+
+      - name: install
+        run: |
+          npm ci
+          npm run install:tests
+  
+      - name: build
+        run: npm run build:tests
+  
+      - name: lint
+        run: npm run lint
+  
+      - name: test
+        run: npm test
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
       - uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - run: npm i
-      - run: npm publish
+
+      - name: install
+        run: npm ci
+
+      - name: publish
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}

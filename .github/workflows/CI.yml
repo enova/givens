@@ -12,21 +12,29 @@ jobs:
         node-version: [8.x, 10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v1
+    - name: checkout
+      uses: actions/checkout@v1
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
+
+    - name: install
       run: |
-        npm i
+        npm ci
         npm run install:tests
-        npm run lint
-        npm run build:tests
-        npm test
-      env:
-        CI: true
-    - name: Coveralls
+
+    - name: build
+      run: npm run build:tests
+
+    - name: lint
+      run: npm run lint
+
+    - name: test
+      run: npm test
+      
+    - name: coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
