@@ -2,11 +2,11 @@
   <img src="/documentation/logo-light.png" alt="givens" width="300">
   <br />
   <br />
-  <img alt="npm" src="https://img.shields.io/npm/v/givens">
+  <a href='https://www.npmjs.com/package/givens'><img alt="npm" src="https://img.shields.io/npm/v/givens"></a>
   <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/enova/givens/CD?label=build">
   <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/enova/givens/CI?label=tests">
   <a href='https://coveralls.io/github/enova/givens?branch=master'><img src='https://coveralls.io/repos/github/enova/givens/badge.svg?branch=master' alt='Coverage Status' /></a>
-  <img alt="GitHub" src="https://img.shields.io/github/license/enova/givens">
+  <a href='https://github.com/enova/givens/blob/master/LICENSE'><img alt="MIT License" src="https://img.shields.io/github/license/enova/givens"></a>
 </p>
 
 Easy test setup without side effects.
