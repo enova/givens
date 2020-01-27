@@ -1,16 +1,13 @@
-import getContextInfo from '../src/getContextInfo';
-
-jest.unmock('../src/getContextInfo');
+const assert = require('assert');
+const getContextInfo = require('givens/dist/getContextInfo').default;
 
 function exampleFn() {
   return getContextInfo(exampleFn);
 }
 
-// we need to use node's assert to test the interactions with jest
-// this is unfortunately unavoidable to test this behavior
-const assert = require('assert');
-
-assert.equal(exampleFn().allowed, true);
+// we need to assert in unusual places in this file.
+// due to the nature of getContextInfo
+assert.equal(exampleFn().allowed, false);
 
 describe('getContextInfo', () => {
   assert.equal(exampleFn().allowed, true);
@@ -32,10 +29,6 @@ describe('getContextInfo', () => {
   });
 
   it('inside it', () => {
-    assert.equal(exampleFn().allowed, false);
-  });
-
-  test('inside test', () => {
     assert.equal(exampleFn().allowed, false);
   });
 });

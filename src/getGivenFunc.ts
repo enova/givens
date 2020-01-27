@@ -10,9 +10,9 @@ import getContextInfo from './getContextInfo';
 
 const getGivenFunc = () => {
   const given = <T, K extends keyof T>(key: K, func: () => T[K]): void => {
-    const contextInfo = getContextInfo();
-    if (contextInfo === 'lifecycle' || contextInfo === 'test') {
-      throw new GivenError('cannot call given from test or lifecycle method', given);
+    const contextInfo = getContextInfo(given);
+    if (!contextInfo.allowed) {
+      throw new GivenError(contextInfo.message, given);
     }
 
     if (!isValid(key as string)) {

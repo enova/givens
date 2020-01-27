@@ -15,7 +15,8 @@ isValidMock.mockImplementation(() => true);
 GivenErrorMock.mockImplementation(
   (message: string) => (new Error(message) as unknown as typeof GivenError),
 );
-getContextInfoMock.mockImplementation(() => 'normal');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+getContextInfoMock.mockImplementation((_: Function) => ({ allowed: true }));
 
 /* eslint-disable no-global-assign */
 beforeAll = jest.fn(beforeAll);
@@ -84,20 +85,12 @@ describe('getGivenFunc', () => {
       });
     });
 
-    it('throws error when context is lifecycle', () => {
-      getContextInfoMock.mockImplementationOnce(() => 'lifecycle');
+    it('throws error when context is not allowed', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      getContextInfoMock.mockImplementationOnce((_: Function) => ({ allowed: false, message: 'error' }));
       expect(() => given('key1', () => 'value')).toThrowError();
       expect(GivenErrorMock).toHaveBeenCalledWith<[string, Function]>(
-        'cannot call given from test or lifecycle method',
-        given,
-      );
-    });
-
-    it('throws error when context is test', () => {
-      getContextInfoMock.mockImplementationOnce(() => 'test');
-      expect(() => given('key1', () => 'value')).toThrowError();
-      expect(GivenErrorMock).toHaveBeenCalledWith<[string, Function]>(
-        'cannot call given from test or lifecycle method',
+        'error',
         given,
       );
     });

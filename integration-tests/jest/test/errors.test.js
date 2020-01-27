@@ -16,7 +16,7 @@ describe('illegal call location', () => {
     beforeEach(() => {
       assert.throws(
         () => given('test', () => 'foo'),
-        (err) => err.message === 'givens: cannot call given from test or lifecycle method',
+        (err) => err.message === 'givens: cannot call givens from a lifecycle hook',
       );
     });
 
@@ -27,7 +27,7 @@ describe('illegal call location', () => {
     afterEach(() => {
       assert.throws(
         () => given('test', () => 'foo'),
-        (err) => err.message === 'givens: cannot call given from test or lifecycle method',
+        (err) => err.message === 'givens: cannot call givens from a lifecycle hook',
       );
     });
 
@@ -38,7 +38,7 @@ describe('illegal call location', () => {
     beforeAll(() => {
       assert.throws(
         () => given('test', () => 'foo'),
-        (err) => err.message === 'givens: cannot call given from test or lifecycle method',
+        (err) => err.message === 'givens: cannot call givens from a lifecycle hook',
       );
     });
 
@@ -49,7 +49,7 @@ describe('illegal call location', () => {
     afterAll(() => {
       assert.throws(
         () => given('test', () => 'foo'),
-        (err) => err.message === 'givens: cannot call given from test or lifecycle method',
+        (err) => err.message === 'givens: cannot call givens from a lifecycle hook',
       );
     });
 
