@@ -11,7 +11,7 @@
 
 Easy test setup without side effects.
 
-For use with [jest](https://github.com/facebook/jest) and [mocha](https://github.com/mochajs/mocha).
+For use with [jest](https://github.com/facebook/jest), [mocha](https://github.com/mochajs/mocha), and [jasmine](https://github.com/jasmine/jasmine.github.io).
 Behavior based on [rspec](https://github.com/enova/givens/blob/master), syntax inspired by [given2](https://github.com/tatyshev/given2)
 
 ---

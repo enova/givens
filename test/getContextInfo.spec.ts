@@ -2,36 +2,46 @@ import getContextInfo from '../src/getContextInfo';
 
 jest.unmock('../src/getContextInfo');
 
+function exampleFn() {
+  return getContextInfo(exampleFn);
+}
+
 // we need to use node's assert to test the interactions with jest
 // this is unfortunately unavoidable to test this behavior
 const assert = require('assert');
 
-assert.equal(getContextInfo(), 'normal');
+assert.equal(exampleFn().allowed, true);
 
 describe('getContextInfo', () => {
-  assert.equal(getContextInfo(), 'normal');
+  assert.equal(exampleFn().allowed, true);
 
   beforeAll(() => {
-    assert.equal(getContextInfo(), 'lifecycle');
+    assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a lifecycle hook');
   });
 
   beforeEach(() => {
-    assert.equal(getContextInfo(), 'lifecycle');
+    assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a lifecycle hook');
   });
 
   afterEach(() => {
-    assert.equal(getContextInfo(), 'lifecycle');
+    assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a lifecycle hook');
   });
 
   afterAll(() => {
-    assert.equal(getContextInfo(), 'lifecycle');
+    assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a lifecycle hook');
   });
 
   it('inside it', () => {
-    assert.equal(getContextInfo(), 'test');
+    assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a test');
   });
 
   test('inside test', () => {
-    assert.equal(getContextInfo(), 'test');
+    assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a test');
   });
 });

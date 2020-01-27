@@ -7,9 +7,7 @@ describe('illegal prop', () => {
     (err) => err.message === 'givens: key "__props__" is not allowed',
   );
 
-  it('does stuff', () => {
-    assert.ok(true);
-  });
+  it('breaks', () => {});
 });
 
 describe('illegal call location', () => {
@@ -17,7 +15,7 @@ describe('illegal call location', () => {
     beforeEach(() => {
       assert.throws(
         () => given('test', () => 'foo'),
-        (err) => err.message === 'givens: cannot call given from test or lifecycle method',
+        (err) => err.message === 'givens: cannot call givens from a lifecycle hook',
       );
     });
 
@@ -28,7 +26,7 @@ describe('illegal call location', () => {
     afterEach(() => {
       assert.throws(
         () => given('test', () => 'foo'),
-        (err) => err.message === 'givens: cannot call given from test or lifecycle method',
+        (err) => err.message === 'givens: cannot call givens from a lifecycle hook',
       );
     });
 
@@ -39,7 +37,7 @@ describe('illegal call location', () => {
     before(() => {
       assert.throws(
         () => given('test', () => 'foo'),
-        (err) => err.message === 'givens: cannot call given from test or lifecycle method',
+        (err) => err.message === 'givens: cannot call givens from a lifecycle hook',
       );
     });
 
@@ -50,7 +48,7 @@ describe('illegal call location', () => {
     after(() => {
       assert.throws(
         () => given('test', () => 'foo'),
-        (err) => err.message === 'givens: cannot call given from test or lifecycle method',
+        (err) => err.message === 'givens: cannot call givens from a lifecycle hook',
       );
     });
 
@@ -59,7 +57,10 @@ describe('illegal call location', () => {
 
   describe('in test', () => {
     it('breaks', () => {
-      assert.throws(() => given('test', () => 'foo'));
+      assert.throws(
+        () => given('test', () => 'foo'),
+        (err) => err.message === 'givens: cannot call givens from a test',
+      );
     });
   });
 });
@@ -78,6 +79,9 @@ describe('with recursive given variables', () => {
   given('nonRecursive', () => given.recursive1);
 
   it('blows up', () => {
-    assert.throws(() => given.nonRecursive);
+    assert.throws(
+      () => given.nonRecursive,
+      (err) => err.message === 'givens: recursive variable recursive1 detected\ntrace: recursive1 => recursive2 => recursive1',
+    );
   });
 });

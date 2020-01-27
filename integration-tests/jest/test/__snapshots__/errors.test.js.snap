@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`illegal call location in test breaks 1`] = `"givens: cannot call given from test or lifecycle method"`;
+exports[`illegal call location in test breaks 1`] = `"givens: cannot call givens from a test"`;
 
 exports[`with recursive given variables blows up: recursive variables error 1`] = `
 "givens: recursive variable recursive1 detected

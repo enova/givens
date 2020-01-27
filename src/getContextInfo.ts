@@ -1,43 +1,99 @@
-type matcherResult = 'lifecycle' | 'test' | 'defer';
+// much of this file uses istanbul ignores.
+// this is because this file behaves differently in different test runners
+// meaning that it's impossible to get code coverage for those routes in jest alone.
 
-function jestContextMatcher(rawStack: string): matcherResult {
+interface AllowedContextInfo {
+  allowed: true;
+}
+interface DisallowedContextInfo {
+  allowed: false;
+  message: string;
+}
+type contextInfo = AllowedContextInfo | DisallowedContextInfo;
+
+function jestContextMatcher(rawStack: string): contextInfo | undefined {
   if (/Object\.asyncJestLifecycle/.test(rawStack)) {
-    return 'lifecycle';
+    return {
+      allowed: false,
+      message: 'cannot call givens from a lifecycle hook',
+    };
   }
   if (/Object\.asyncJestTest/.test(rawStack)) {
-    return 'test';
+    return {
+      allowed: false,
+      message: 'cannot call givens from a test',
+    };
   }
-  return 'defer';
+  /* istanbul ignore else */
+  if (/jest-jasmine2/.test(rawStack)) {
+    return { allowed: true };
+  }
+  /* istanbul ignore next */
+  return undefined;
 }
 
-function mochaContextMatcher(rawStack: string): matcherResult {
-  /* istanbul ignore next */
+/* istanbul ignore next */
+function mochaContextMatcher(rawStack: string): contextInfo | undefined {
   if (/Test\.Runnable\.run/.test(rawStack)) {
-    return 'test';
+    return {
+      allowed: false,
+      message: 'cannot call givens from a test',
+    };
   }
-  /* istanbul ignore next */
   if (/Hook\.Runnable\.run/.test(rawStack)) {
-    return 'lifecycle';
+    return {
+      allowed: false,
+      message: 'cannot call givens from a lifecycle hook',
+    };
   }
-  return 'defer';
+  if (/Mocha/.test(rawStack)) {
+    return { allowed: true };
+  }
+  return undefined;
 }
 
+/* istanbul ignore next */
+function jasmineContextMatcher(rawStack: string): contextInfo | undefined {
+  if (/jasmine\.js/.test(rawStack)) {
+    if (!/Env\.describe/.test(rawStack)) {
+      return {
+        allowed: false,
+        message: 'given must be called inside a describe',
+      };
+    }
+    return { allowed: true };
+  }
+  return undefined;
+}
 
-export default function getContextInfo(): 'normal' | 'lifecycle' | 'test' {
+export default function getContextInfo(ssf: Function): contextInfo {
   let rawStack: string;
   try {
-    throw new Error();
+    const err = new Error();
+    /* istanbul ignore else */
+    if ((Error as any).captureStackTrace) {
+      (Error as any).captureStackTrace(err, ssf);
+    }
+    throw err;
   } catch (e) {
     rawStack = e.stack;
   }
-  let context: matcherResult;
-
+  let context: contextInfo | undefined;
   context = jestContextMatcher(rawStack);
-  if (context !== 'defer') { return context; }
 
+  /* istanbul ignore else */
+  if (context !== undefined) { return context; }
+
+  /* istanbul ignore next */
   context = mochaContextMatcher(rawStack);
   /* istanbul ignore next */
-  if (context !== 'defer') { return context; }
+  if (context !== undefined) { return context; }
 
-  return 'normal';
+  /* istanbul ignore next */
+  context = jasmineContextMatcher(rawStack);
+  /* istanbul ignore next */
+  if (context !== undefined) { return context; }
+
+  /* istanbul ignore next */
+  return { allowed: true };
 }
