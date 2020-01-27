@@ -3,7 +3,4 @@ module.exports = {
   env: {
     jasmine: true
   },
-  globals: {
-    given: "readonly",
-  }
 };

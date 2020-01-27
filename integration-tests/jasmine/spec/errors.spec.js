@@ -82,7 +82,7 @@ describe('error behavior', () => {
     given('nonRecursive', () => given.recursive1);
 
     it('blows up', () => {
-      expect(() => given.nonRecursive).toThrowError();
+      expect(() => given.nonRecursive).toThrowError('givens: recursive variable recursive1 detected\ntrace: recursive1 => recursive2 => recursive1');
     });
   });
 });
