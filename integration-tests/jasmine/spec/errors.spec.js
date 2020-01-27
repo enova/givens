@@ -63,7 +63,7 @@ describe('error behavior', () => {
 
     describe('in test', () => {
       it('breaks', () => {
-        expect(() => given('test', () => 'foo')).toThrowError();
+        expect(() => given('test', () => 'foo')).toThrowError('givens: given must be called inside a describe');
       });
     });
   });

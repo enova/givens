@@ -7,9 +7,7 @@ describe('illegal prop', () => {
     (err) => err.message === 'givens: key "__props__" is not allowed',
   );
 
-  it('does stuff', () => {
-    assert.ok(true);
-  });
+  it('breaks', () => {});
 });
 
 describe('illegal call location', () => {
@@ -81,6 +79,9 @@ describe('with recursive given variables', () => {
   given('nonRecursive', () => given.recursive1);
 
   it('blows up', () => {
-    assert.throws(() => given.nonRecursive);
+    assert.throws(
+      () => given.nonRecursive,
+      (err) => err.message === 'givens: recursive variable recursive1 detected\ntrace: recursive1 => recursive2 => recursive1',
+    );
   });
 });

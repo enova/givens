@@ -17,25 +17,31 @@ describe('getContextInfo', () => {
 
   beforeAll(() => {
     assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a lifecycle hook');
   });
 
   beforeEach(() => {
     assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a lifecycle hook');
   });
 
   afterEach(() => {
     assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a lifecycle hook');
   });
 
   afterAll(() => {
     assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a lifecycle hook');
   });
 
   it('inside it', () => {
     assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a test');
   });
 
   test('inside test', () => {
     assert.equal(exampleFn().allowed, false);
+    assert.equal((exampleFn() as any).message, 'cannot call givens from a test');
   });
 });
