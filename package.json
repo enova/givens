@@ -1,6 +1,6 @@
 {
   "name": "givens",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "description": "Easy test setup without side effects",
   "main": "dist/getGiven.js",
   "types": "dist/getGiven.d.ts",
