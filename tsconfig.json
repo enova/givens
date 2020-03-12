@@ -3,7 +3,7 @@
     "target": "ES6",
     "lib": ["es2016", "dom"],
     "module": "commonjs",
-    "declaration": true,
+    "declaration": false,
     "outDir": "./dist",
     "strict": true
   },
