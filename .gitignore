@@ -1,9 +1,11 @@
 node_modules
 dist
 coverage
-integration-tests/jest/givens.tgz
-integration-tests/jest/package-lock.json
-integration-tests/mocha/givens.tgz
-integration-tests/mocha/package-lock.json
-integration-tests/jasmine/givens.tgz
-integration-tests/jasmine/package-lock.json
+integration-tests/javascript/jest/givens.tgz
+integration-tests/javascript/jest/package-lock.json
+integration-tests/javascript/mocha/givens.tgz
+integration-tests/javascript/mocha/package-lock.json
+integration-tests/javascript/jasmine/givens.tgz
+integration-tests/javascript/jasmine/package-lock.json
+integration-tests/typescript/jest/givens.tgz
+integration-tests/typescript/jest/package-lock.json
