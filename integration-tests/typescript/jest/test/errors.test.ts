@@ -23,7 +23,7 @@ describe('illegal call location', () => {
       );
     });
 
-    it('breaks', () => {});
+    it('breaks', () => undefined);
   });
 
   describe('in afterEach method', () => {
@@ -34,7 +34,7 @@ describe('illegal call location', () => {
       );
     });
 
-    it('breaks', () => {});
+    it('breaks', () => undefined);
   });
 
   describe('in beforeAll method', () => {
@@ -45,7 +45,7 @@ describe('illegal call location', () => {
       );
     });
 
-    it('breaks', () => {});
+    it('breaks', () => undefined);
   });
 
   describe('in afterAll method', () => {
@@ -56,7 +56,7 @@ describe('illegal call location', () => {
       );
     });
 
-    it('breaks', () => {});
+    it('breaks', () => undefined);
   });
 
   describe('in test', () => {

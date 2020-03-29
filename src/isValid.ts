@@ -1,7 +1,3 @@
-interface parsedKey {
-  valid: boolean;
-  errorMessage?: string;
-}
 
 function allProps(object: any): string[] {
   const myProps = Object.getOwnPropertyNames(object);
@@ -18,7 +14,7 @@ const disallowedProps = [
   // prototype props
   ...allProps(
     /* istanbul ignore next */
-    () => {},
+    () => undefined,
   ),
 ];
 

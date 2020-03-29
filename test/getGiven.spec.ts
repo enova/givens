@@ -8,7 +8,7 @@ jest.unmock('../src/getGiven');
 
 describe('getGiven', () => {
   const myGiven = getGiven<any>();
-  myGiven('key', () => {});
+  myGiven('key', () => undefined);
 
   it('passes getGivenFunc through', () => {
     expect(originalFunc).toHaveBeenCalled();

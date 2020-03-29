@@ -4,7 +4,7 @@ jest.unmock('../src/givenError');
 
 describe('GivenError', () => {
   it('appends "givens: " to the beginning of the message', () => {
-    const err = new GivenError('message', () => {});
+    const err = new GivenError('message', () => undefined);
     expect(err.message).toEqual('givens: message');
   });
 

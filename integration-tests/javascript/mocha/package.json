@@ -7,9 +7,6 @@
     "lint": "eslint test/**.*"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-mocha": "^6.2.2",
     "givens": "file:givens.tgz",
     "mocha": "^7.0.0"
   }

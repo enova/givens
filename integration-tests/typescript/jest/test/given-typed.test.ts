@@ -1,14 +1,14 @@
 import assert from 'assert';
 import getGiven from 'givens';
 
-interface myVars {
+interface MyVars {
   var1: string;
   var2: string;
   var: { value: string };
   random: number;
 }
 
-const given = getGiven<myVars>();
+const given = getGiven<MyVars>();
 
 describe('basic overriding behavior', () => {
   given('var1', () => 'initial value');

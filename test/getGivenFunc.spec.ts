@@ -41,12 +41,12 @@ describe('getGivenFunc', () => {
   });
 
   describe('given function', () => {
-    interface test {
-      key1: string,
-      key2: string,
-      key3: string,
+    interface Test {
+      key1: string;
+      key2: string;
+      key3: string;
     }
-    const given = getGiven<test>();
+    const given = getGiven<Test>();
 
     it('calls beforeAll', () => {
       given('key1', () => 'value1');

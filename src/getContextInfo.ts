@@ -9,9 +9,9 @@ interface DisallowedContextInfo {
   allowed: false;
   message: string;
 }
-type contextInfo = AllowedContextInfo | DisallowedContextInfo;
+type ContextInfo = AllowedContextInfo | DisallowedContextInfo;
 
-function jestContextMatcher(rawStack: string): contextInfo | undefined {
+function jestContextMatcher(rawStack: string): ContextInfo | undefined {
   if (/Object\.asyncJestLifecycle/.test(rawStack)) {
     return {
       allowed: false,
@@ -33,7 +33,7 @@ function jestContextMatcher(rawStack: string): contextInfo | undefined {
 }
 
 /* istanbul ignore next */
-function mochaContextMatcher(rawStack: string): contextInfo | undefined {
+function mochaContextMatcher(rawStack: string): ContextInfo | undefined {
   if (/Test\.Runnable\.run/.test(rawStack)) {
     return {
       allowed: false,
@@ -53,7 +53,7 @@ function mochaContextMatcher(rawStack: string): contextInfo | undefined {
 }
 
 /* istanbul ignore next */
-function jasmineContextMatcher(rawStack: string): contextInfo | undefined {
+function jasmineContextMatcher(rawStack: string): ContextInfo | undefined {
   if (/jasmine\.js/.test(rawStack)) {
     if (!/Env\.describe/.test(rawStack)) {
       return {
@@ -66,7 +66,7 @@ function jasmineContextMatcher(rawStack: string): contextInfo | undefined {
   return undefined;
 }
 
-export default function getContextInfo(ssf: Function): contextInfo {
+export default function getContextInfo(ssf: Function): ContextInfo {
   let rawStack: string;
   try {
     const err = new Error();
@@ -78,7 +78,7 @@ export default function getContextInfo(ssf: Function): contextInfo {
   } catch (e) {
     rawStack = e.stack;
   }
-  let context: contextInfo | undefined;
+  let context: ContextInfo | undefined;
   context = jestContextMatcher(rawStack);
 
   /* istanbul ignore else */
