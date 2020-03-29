@@ -21,10 +21,10 @@
     "copy-dts": "copyfiles -u 1 \"src/getGiven.d.ts\" dist",
     "lint": "npm-run-all --continue-on-error lint:**",
     "lint:main": "eslint ./src/**.* ./test/**.* --ext .ts",
-    "lint:js-jest": "cd integration-tests/javascript/jest && npm run lint",
-    "lint:js-mocha": "cd integration-tests/javascript/mocha && npm run lint",
-    "lint:js-jasmine": "cd integration-tests/javascript/jasmine && npm run lint",
-    "lint:ts-jest": "cd integration-tests/typescript/jest && npm run lint",
+    "lint:js-jest": "eslint ./integration-tests/javascript/jest/test/**.* --ext .js",
+    "lint:js-mocha": "eslint ./integration-tests/javascript/mocha/test/**.* --ext .js",
+    "lint:js-jasmine": "eslint ./integration-tests/javascript/jasmine/spec/**.* --ext .js",
+    "lint:ts-jest": "eslint ./integration-tests/typescript/jest/test/**.* --ext .ts",
     "test": "npm-run-all --continue-on-error test:**",
     "test:unit": "jest",
     "test:js-jest": "cd integration-tests/javascript/jest && npm test",
@@ -55,10 +55,10 @@
     "@typescript-eslint/parser": "^2.24.0",
     "copyfiles": "^2.2.0",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-config-airbnb-typescript": "^7.2.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-jasmine": "^4.1.0",
+    "eslint-plugin-mocha": "^4.1.0",
     "jest": "^25.1.0",
     "npm-run-all": "^4.1.5",
     "ts-jest": "^25.2.1",
@@ -71,10 +71,13 @@
       "@typescript-eslint"
     ],
     "extends": [
-      "airbnb-typescript/base"
+      "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-      "no-underscore-dangle": "off"
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-var-requires": "off"
     }
   }
 }

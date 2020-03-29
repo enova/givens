@@ -8,6 +8,7 @@ function exampleFn() {
 
 // we need to use node's assert to test the interactions with jest
 // this is unfortunately unavoidable to test this behavior
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const assert = require('assert');
 
 assert.equal(exampleFn().allowed, true);
