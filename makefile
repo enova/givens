@@ -1,4 +1,4 @@
-.PHONY: clean clean_integration_tests test prepack
+.PHONY: clean clean_integration_tests prepack
 
 NODE_BIN=./node_modules/.bin/
 TSC=$(NODE_BIN)tsc
