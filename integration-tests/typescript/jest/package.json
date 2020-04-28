@@ -3,11 +3,18 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest",
-    "preinstall": "./build-givens.sh",
-    "lint": "eslint test/**.*"
+    "preinstall": "cd ../../../ && make package"
   },
   "devDependencies": {
-    "givens": "file:givens.tgz",
+    "givens": "file:../../../package",
     "jest": "^25.1.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "verbose": true,
+    "setupFilesAfterEnv": [
+      "givens/setup.js"
+    ]
   }
 }

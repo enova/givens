@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "test": "mocha",
-    "preinstall": "./build-givens.sh",
-    "lint": "eslint test/**.*"
+    "preinstall": "cd ../../../ && make package"
   },
   "devDependencies": {
-    "givens": "file:givens.tgz",
+    "givens": "file:../../../package",
     "mocha": "^7.0.0"
   }
 }

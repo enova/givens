@@ -4,7 +4,8 @@
     "lib": ["es2016", "dom"],
     "module": "commonjs",
     "declaration": false,
-    "outDir": "./dist",
+    "sourceMap": true,
+    "outDir": "./build",
     "strict": true
   },
   "include": ["src"],

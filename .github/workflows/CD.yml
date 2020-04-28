@@ -17,10 +17,8 @@ jobs:
       - name: install
         run: |
           npm ci
+          make package
           npm run install:tests
-  
-      - name: build
-        run: npm run build:tests
   
       - name: lint
         run: npm run lint

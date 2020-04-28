@@ -10,28 +10,28 @@
     "setup.js"
   ],
   "scripts": {
-    "prepack": "npm run build",
+    "prepack": "make prepack",
+    "clean": "make clean",
+
     "install:tests": "npm-run-all install:tests:**",
-    "install:tests:js-jest": "cd integration-tests/javascript/jest && npm i --no-package-lock",
-    "install:tests:js-mocha": "cd integration-tests/javascript/mocha && npm i --no-package-lock",
-    "install:tests:js-jasmine": "cd integration-tests/javascript/jasmine && npm i --no-package-lock",
-    "install:tests:ts-jest": "cd integration-tests/typescript/jest && npm i --no-package-lock",
-    "build": "tsc --removeComments && npm run copy-dts",
-    "build:tests": "tsc --inlineSourceMap && npm run copy-dts",
-    "copy-dts": "copyfiles -u 1 \"src/getGiven.d.ts\" dist",
+    "install:tests:js-jest": "cd integration-tests/javascript/jest && npm ci",
+    "install:tests:js-mocha": "cd integration-tests/javascript/mocha && npm ci",
+    "install:tests:js-jasmine": "cd integration-tests/javascript/jasmine && npm ci",
+    "install:tests:ts-jest": "cd integration-tests/typescript/jest && npm ci",
+
     "lint": "npm-run-all --continue-on-error lint:**",
     "lint:main": "eslint ./src/**.* ./test/**.* --ext .ts",
     "lint:js-jest": "eslint ./integration-tests/javascript/jest/test/**.* --ext .js",
     "lint:js-mocha": "eslint ./integration-tests/javascript/mocha/test/**.* --ext .js",
     "lint:js-jasmine": "eslint ./integration-tests/javascript/jasmine/spec/**.* --ext .js",
     "lint:ts-jest": "eslint ./integration-tests/typescript/jest/test/**.* --ext .ts",
+
     "test": "npm-run-all --continue-on-error test:**",
     "test:unit": "jest",
     "test:js-jest": "cd integration-tests/javascript/jest && npm test",
     "test:js-mocha": "cd integration-tests/javascript/mocha && npm test",
     "test:js-jasmine": "cd integration-tests/javascript/jasmine && npm test",
-    "test:ts-jest": "cd integration-tests/typescript/jest && npm test",
-    "clean": "./clean.sh"
+    "test:ts-jest": "cd integration-tests/typescript/jest && npm test"
   },
   "keywords": [
     "jest",
@@ -64,20 +64,22 @@
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
   },
-  "eslintConfig": {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
+  "jest": {
+    "automock": true,
+    "verbose": true,
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/test"
     ],
-    "extends": [
-      "plugin:@typescript-eslint/recommended"
+    "testMatch": [
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
     ],
-    "rules": {
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/no-non-null-assertion": "off",
-      "@typescript-eslint/no-var-requires": "off"
-    }
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ]
   }
 }

@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jasmine",
-    "preinstall": "./build-givens.sh",
-    "lint": "eslint spec/**.*"
+    "preinstall": "cd ../../../ && make package"
   },
   "devDependencies": {
-    "givens": "file:givens.tgz",
+    "givens": "file:../../../package",
     "jasmine": "^3.5.0"
   }
 }
