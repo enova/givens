@@ -1,8 +1,12 @@
-.PHONY: clean clean_integration_tests prepack
+.PHONY: clean clean_integration_tests dist package instrument
 
 NODE_BIN=./node_modules/.bin/
+BUILD_DIR=build
+DIST_DIR=dist
 TSC=$(NODE_BIN)tsc
+NYC=$(NODE_BIN)nyc
 NPM=npm
+SOURCE_MAP_URL=npx source-map-url-cli
 
 SOURCE_NAMES = evaluate getContextInfo getGiven getGivenFunc givenError isValid types
 
@@ -11,45 +15,55 @@ JS_FILE_NAMES = $(addsuffix .js,$(SOURCE_NAMES))
 MAP_FILE_NAMES = $(addsuffix .js.map,$(SOURCE_NAMES))
 
 SOURCE_FILES = $(addprefix src/,$(TS_FILE_NAMES))
-TSC_OUT_FILES = $(addprefix build/,$(JS_FILE_NAMES) $(MAP_FILE_NAMES))
+TSC_OUT_FILES = $(addprefix $(BUILD_DIR)/tsc/,$(JS_FILE_NAMES) $(MAP_FILE_NAMES))
 DIST_FILES = $(addprefix dist/,$(JS_FILE_NAMES)) dist/getGiven.d.ts
+PACKAGE_FILES = $(addprefix $(BUILD_DIR)/package/,$(DIST_FILES) LICENSE package.json README.md setup.js)
+INSTRUMENTED_FILES = $(addprefix $(BUILD_DIR)/instrumented/dist/,$(JS_FILE_NAMES))
 
 #===============
 #     BUILD
 #===============
-$(TSC_OUT_FILES) &: $(SOURCE_FILES)
+$(TSC_OUT_FILES) &: $(SOURCE_FILES) tsconfig.json
 	$(TSC)
 
 #===============
 #     DIST
 #===============
-dist :
-	mkdir $@
+$(DIST_DIR)/getGiven.d.ts : src/getGiven.d.ts
+	mkdir -p $(DIST_DIR)
+	cp src/getGiven.d.ts $(DIST_DIR)/getGiven.d.ts
 
-dist/getGiven.d.ts : dist src/getGiven.d.ts
-	cp src/getGiven.d.ts dist/getGiven.d.ts
+$(DIST_DIR)/%.js : $(BUILD_DIR)/tsc/%.js
+	mkdir -p $(DIST_DIR)
+	$(SOURCE_MAP_URL) remove < $< > $@
 
-dist/%.js : build/%.js dist
-	cp $< $@
-
-prepack : $(DIST_FILES)
+dist : $(DIST_FILES)
 
 #===============
 #     PACK
 #===============
-givens.tgz : $(DIST_FILES)
+$(BUILD_DIR)/givens.tgz : $(DIST_FILES)
 	$(NPM) pack
-	mv givens-*.tgz givens.tgz
+	mv givens-*.tgz $(BUILD_DIR)/givens.tgz
 
-package : givens.tgz
-	tar zxf givens.tgz
+$(PACKAGE_FILES) &: $(BUILD_DIR)/givens.tgz
+	tar zxf $(BUILD_DIR)/givens.tgz -C $(BUILD_DIR)
+	for i in build/package/dist/*.js; do\
+		[ -f "$$i" ] || break; \
+		$(SOURCE_MAP_URL) set -u ../../tsc/$$(basename $$i).map < $$i > $$i.temp; \
+		mv -f $$i.temp $$i ;\
+	done
+
+package: $(PACKAGE_FILES)
 
 #===============
 #     CLEAN
 #===============
 clean : clean_integration_tests
-	rm -f givens.tgz
-	rm -rf build dist coverage node_modules package
+	rm -rf build dist coverage
 
 clean_integration_tests :
 	find integration-tests -maxdepth 3 -type d -name 'node_modules' -print0|xargs -0 rm -rf --
+
+clean_all : clean clean_integration_tests
+	rm -rf node_modules

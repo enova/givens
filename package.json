@@ -10,27 +10,24 @@
     "setup.js"
   ],
   "scripts": {
-    "prepack": "make prepack",
-    "clean": "make clean",
-
+    "prepack": "gmake dist",
+    "clean": "gmake clean",
     "install:tests": "npm-run-all install:tests:**",
     "install:tests:js-jest": "cd integration-tests/javascript/jest && npm ci",
     "install:tests:js-mocha": "cd integration-tests/javascript/mocha && npm ci",
     "install:tests:js-jasmine": "cd integration-tests/javascript/jasmine && npm ci",
     "install:tests:ts-jest": "cd integration-tests/typescript/jest && npm ci",
-
     "lint": "npm-run-all --continue-on-error lint:**",
     "lint:main": "eslint ./src/**.* ./test/**.* --ext .ts",
     "lint:js-jest": "eslint ./integration-tests/javascript/jest/test/**.* --ext .js",
     "lint:js-mocha": "eslint ./integration-tests/javascript/mocha/test/**.* --ext .js",
     "lint:js-jasmine": "eslint ./integration-tests/javascript/jasmine/spec/**.* --ext .js",
     "lint:ts-jest": "eslint ./integration-tests/typescript/jest/test/**.* --ext .ts",
-
     "test": "npm-run-all --continue-on-error test:**",
     "test:unit": "jest",
     "test:js-jest": "cd integration-tests/javascript/jest && npm test",
-    "test:js-mocha": "cd integration-tests/javascript/mocha && npm test",
-    "test:js-jasmine": "cd integration-tests/javascript/jasmine && npm test",
+    "test:js-mocha": "cd integration-tests/javascript/mocha && npm run coverage",
+    "test:js-jasmine": "cd integration-tests/javascript/jasmine && npm run coverage",
     "test:ts-jest": "cd integration-tests/typescript/jest && npm test"
   },
   "keywords": [
@@ -56,11 +53,12 @@
     "copyfiles": "^2.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-jasmine": "^4.1.0",
+    "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-mocha": "^4.1.0",
     "jest": "^25.1.0",
     "npm-run-all": "^4.1.5",
+    "source-map-url-cli": "^0.1.0",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
   },

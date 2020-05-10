@@ -1,0 +1,7 @@
+{
+    "all": false,
+    "cwd": "../../../build",
+    "reporter": ["lcov", "text"],
+    "report-dir": "./coverage/javascript/jasmine",
+    "temp-dir": "./nyc-temp"
+}

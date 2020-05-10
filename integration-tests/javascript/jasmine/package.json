@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jasmine",
-    "preinstall": "cd ../../../ && make package"
+    "coverage": "nyc npm run test",
+    "preinstall": "cd ../../../ && gmake package"
   },
   "devDependencies": {
-    "givens": "file:../../../package",
-    "jasmine": "^3.5.0"
+    "givens": "file:../../../build/package",
+    "jasmine": "^3.5.0",
+    "nyc": "^15.0.1"
   }
 }

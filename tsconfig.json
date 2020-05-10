@@ -5,7 +5,7 @@
     "module": "commonjs",
     "declaration": false,
     "sourceMap": true,
-    "outDir": "./build",
+    "outDir": "./build/tsc",
     "strict": true
   },
   "include": ["src"],

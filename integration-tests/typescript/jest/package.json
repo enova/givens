@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest",
-    "preinstall": "cd ../../../ && make package"
+    "preinstall": "cd ../../../ && gmake package"
   },
   "devDependencies": {
-    "givens": "file:../../../package",
+    "givens": "file:../../../build/package",
     "jest": "^25.1.0"
   },
   "jest": {
