@@ -4,7 +4,7 @@
   "scripts": {
     "test": "jasmine",
     "coverage": "nyc npm run test",
-    "preinstall": "cd ../../../ && gmake package"
+    "preinstall": "cd ../../../ && make package"
   },
   "devDependencies": {
     "givens": "file:../../../build/package",

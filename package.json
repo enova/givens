@@ -10,8 +10,8 @@
     "setup.js"
   ],
   "scripts": {
-    "prepack": "gmake dist",
-    "clean": "gmake clean",
+    "prepack": "make dist",
+    "clean": "make clean",
     "install:tests": "npm-run-all install:tests:**",
     "install:tests:js-jest": "cd integration-tests/javascript/jest && npm ci",
     "install:tests:js-mocha": "cd integration-tests/javascript/mocha && npm ci",
