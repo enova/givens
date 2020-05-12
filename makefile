@@ -63,7 +63,7 @@ clean : clean_integration_tests
 	rm -rf build dist coverage
 
 clean_integration_tests :
-	find integration-tests -maxdepth 3 -type d -name 'node_modules' -print0|xargs -0 rm -rf --
+	find test/integration-tests -maxdepth 3 -type d -name 'node_modules' -print0|xargs -0 rm -rf --
 
 clean_all : clean clean_integration_tests
 	rm -rf node_modules

@@ -11,13 +11,13 @@ function jestContextMatcher(rawStack: string): ContextInfo | undefined {
   if (/Object\.asyncJestLifecycle/.test(rawStack)) {
     return {
       allowed: false,
-      message: 'cannot call givens from a lifecycle hook',
+      message: 'cannot call given from a lifecycle hook',
     };
   }
   if (/Object\.asyncJestTest/.test(rawStack)) {
     return {
       allowed: false,
-      message: 'cannot call givens from a test',
+      message: 'cannot call given from a test',
     };
   }
   if (/jest-jasmine2/.test(rawStack)) {
@@ -30,13 +30,13 @@ function mochaContextMatcher(rawStack: string): ContextInfo | undefined {
   if (/Test\.Runnable\.run/.test(rawStack)) {
     return {
       allowed: false,
-      message: 'cannot call givens from a test',
+      message: 'cannot call given from a test',
     };
   }
   if (/Hook\.Runnable\.run/.test(rawStack)) {
     return {
       allowed: false,
-      message: 'cannot call givens from a lifecycle hook',
+      message: 'cannot call given from a lifecycle hook',
     };
   }
   if (/Mocha/.test(rawStack)) {
@@ -46,16 +46,16 @@ function mochaContextMatcher(rawStack: string): ContextInfo | undefined {
 }
 
 function jasmineContextMatcher(rawStack: string): ContextInfo | undefined {
-  if (/jasmine\.js/.test(rawStack)) {
-    if (!/Env\.describe/.test(rawStack)) {
-      return {
-        allowed: false,
-        message: 'given must be called inside a describe',
-      };
-    }
-    return { allowed: true };
+  if (!/jasmine\.js/.test(rawStack)) {
+    return undefined;
   }
-  return undefined;
+  if (!/Env\.describe/.test(rawStack)) {
+    return {
+      allowed: false,
+      message: 'given must be called inside a describe',
+    };
+  }
+  return { allowed: true };
 }
 
 export default function getContextInfo(ssf: Function): ContextInfo {
@@ -70,8 +70,8 @@ export default function getContextInfo(ssf: Function): ContextInfo {
     rawStack = e.stack;
   }
   let context: ContextInfo | undefined;
-  context = jestContextMatcher(rawStack);
 
+  context = jestContextMatcher(rawStack);
   if (context !== undefined) { return context; }
 
   context = mochaContextMatcher(rawStack);

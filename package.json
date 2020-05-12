@@ -13,22 +13,22 @@
     "prepack": "make dist",
     "clean": "make clean",
     "install:tests": "npm-run-all install:tests:**",
-    "install:tests:js-jest": "cd integration-tests/javascript/jest && npm ci",
-    "install:tests:js-mocha": "cd integration-tests/javascript/mocha && npm ci",
-    "install:tests:js-jasmine": "cd integration-tests/javascript/jasmine && npm ci",
-    "install:tests:ts-jest": "cd integration-tests/typescript/jest && npm ci",
+    "install:tests:js-jest": "cd test/integration-tests/javascript/jest && npm ci",
+    "install:tests:js-mocha": "cd test/integration-tests/javascript/mocha && npm ci",
+    "install:tests:js-jasmine": "cd test/integration-tests/javascript/jasmine && npm ci",
+    "install:tests:ts-jest": "cd test/integration-tests/typescript/jest && npm ci",
     "lint": "npm-run-all --continue-on-error lint:**",
     "lint:main": "eslint ./src/**.* ./test/**.* --ext .ts",
-    "lint:js-jest": "eslint ./integration-tests/javascript/jest/test/**.* --ext .js",
-    "lint:js-mocha": "eslint ./integration-tests/javascript/mocha/test/**.* --ext .js",
-    "lint:js-jasmine": "eslint ./integration-tests/javascript/jasmine/spec/**.* --ext .js",
-    "lint:ts-jest": "eslint ./integration-tests/typescript/jest/test/**.* --ext .ts",
+    "lint:js-jest": "eslint ./test/integration-tests/javascript/jest/test/**.* --ext .js",
+    "lint:js-mocha": "eslint ./test/integration-tests/javascript/mocha/test/**.* --ext .js",
+    "lint:js-jasmine": "eslint ./test/integration-tests/javascript/jasmine/spec/**.* --ext .js",
+    "lint:ts-jest": "eslint ./test/integration-tests/typescript/jest/test/**.* --ext .ts",
     "test": "npm-run-all --continue-on-error test:**",
     "test:unit": "jest",
-    "test:js-jest": "cd integration-tests/javascript/jest && npm test",
-    "test:js-mocha": "cd integration-tests/javascript/mocha && npm run coverage",
-    "test:js-jasmine": "cd integration-tests/javascript/jasmine && npm run coverage",
-    "test:ts-jest": "cd integration-tests/typescript/jest && npm test"
+    "test:js-jest": "cd test/integration-tests/javascript/jest && npm test",
+    "test:js-mocha": "cd test/integration-tests/javascript/mocha && npm run coverage",
+    "test:js-jasmine": "cd test/integration-tests/javascript/jasmine && npm run coverage",
+    "test:ts-jest": "cd test/integration-tests/typescript/jest && npm test"
   },
   "keywords": [
     "jest",
@@ -67,7 +67,7 @@
     "verbose": true,
     "roots": [
       "<rootDir>/src",
-      "<rootDir>/test"
+      "<rootDir>/test/unit-tests"
     ],
     "testMatch": [
       "**/?(*.)+(spec|test).+(ts|tsx|js)"

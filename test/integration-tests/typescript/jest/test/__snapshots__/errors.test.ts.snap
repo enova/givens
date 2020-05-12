@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`illegal call location in test breaks 1`] = `"givens: cannot call given from a test"`;
+
+exports[`with recursive given variables blows up 1`] = `
+"givens: recursive variable recursive1 detected
+trace: recursive1 => recursive2 => recursive1"
+`;

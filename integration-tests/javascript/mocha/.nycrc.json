@@ -1,7 +1,0 @@
-{
-    "all": false,
-    "cwd": "../../../build",
-    "reporter": ["lcov"],
-    "report-dir": "./coverage/javascript/mocha",
-    "temp-dir": "./nyc-temp"
-}
