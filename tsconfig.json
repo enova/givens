@@ -4,9 +4,10 @@
     "lib": ["es2016", "dom"],
     "module": "commonjs",
     "declaration": false,
-    "outDir": "./dist",
+    "sourceMap": true,
+    "outDir": "./build/tsc",
     "strict": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "test"],
+  "exclude": ["node_modules", "tests"],
 }

@@ -13,6 +13,7 @@ const disallowedProps = [
   '__trace__',
   // prototype props
   ...allProps(
+    // this is a noop function so the contents do not need to be covered
     /* istanbul ignore next */
     () => undefined,
   ),

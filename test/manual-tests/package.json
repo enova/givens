@@ -1,0 +1,15 @@
+{
+  "name": "givens-manual-tests",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "./run-tests.js",
+    "coverage": "nyc npm run test",
+    "preinstall": "cd ../../ && make package"
+  },
+  "devDependencies": {
+    "async": "^3.2.0",
+    "givens": "file:../../build/package",
+    "nyc": "^15.0.1"
+  },
+  "dependencies": {}
+}

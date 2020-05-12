@@ -4,10 +4,6 @@
 
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
-		"hbenl.vscode-test-explorer",
-		"connorshea.vscode-test-explorer-status-bar",
-		"hbenl.vscode-mocha-test-adapter",
-		"rtbenfield.vscode-jest-test-adapter",
 		"dbaeumer.vscode-eslint"
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
