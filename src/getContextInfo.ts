@@ -62,6 +62,7 @@ export default function getContextInfo(ssf: Function): ContextInfo {
   let rawStack: string;
   try {
     const err = new Error();
+    /* istanbul ignore else */
     if ((Error as any).captureStackTrace) {
       (Error as any).captureStackTrace(err, ssf);
     }
