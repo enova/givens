@@ -40,8 +40,11 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.codecov_token }}
-        file: ./build/coverage/javascript/mocha/lcov.info
-        flags: integration mocha javascript
+        file: ./build/coverage/integration/javascript/mocha/lcov.info
+        flags:
+          - integration
+          - mocha
+          - javascript
         name: mocha js integration tests
         fail_ci_if_error: true
 
@@ -49,7 +52,21 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.codecov_token }}
-        file: ./build/coverage/javascript/jasmine/lcov.info
-        flags: integration jasmine javascript
+        file: ./build/coverage/integration/javascript/jasmine/lcov.info
+        flags:
+          - integration
+          - jasmine
+          - javascript
         name: jasmine js integration tests
+        fail_ci_if_error: true
+
+    - name: upload manual coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.codecov_token }}
+        file: ./build/coverage/manual/lcov.info
+        flags:
+          - manual
+          - javascript
+        name: manual tests
         fail_ci_if_error: true

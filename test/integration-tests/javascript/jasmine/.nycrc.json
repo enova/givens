@@ -2,6 +2,6 @@
     "all": false,
     "cwd": "../../../../build",
     "reporter": ["lcov"],
-    "report-dir": "./coverage/javascript/jasmine",
+    "report-dir": "./coverage/integration/javascript/jasmine",
     "temp-dir": "./nyc-temp"
 }

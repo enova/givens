@@ -65,5 +65,8 @@ clean : clean_integration_tests
 clean_integration_tests :
 	find test/integration-tests -maxdepth 3 -type d -name 'node_modules' -print0|xargs -0 rm -rf --
 
-clean_all : clean clean_integration_tests
+clean_manual_tests :
+	rm -rf test/manual-tests/node_modules
+
+clean_all : clean clean_integration_tests clean_manual_tests
 	rm -rf node_modules

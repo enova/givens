@@ -56,18 +56,20 @@ const getGivenFunc = () => {
 
     if (typeof beforeAll === 'function') {
       beforeAll(push);
-    }
-    if (typeof before === 'function') {
+    } else if (typeof before === 'function') {
       before(`givens setup ${key}`, push);
+    } else {
+      throw new GivenError('no test runner found', given);
     }
+
     if (typeof afterAll === 'function') {
       afterAll(pop);
-    }
-    if (typeof after === 'function') {
+    } else if (typeof after === 'function') {
       after(`givens teardown ${key}`, pop);
+    } else {
+      throw new GivenError('no test runner found', given);
     }
   };
-  /* istanbul ignore else */
   if (typeof afterEach === 'function') {
     // clear the cache after every test
     afterEach(() => {
@@ -76,6 +78,8 @@ const getGivenFunc = () => {
         delete cache[key];
       });
     });
+  } else {
+    throw new GivenError('no test runner found', getGivenFunc);
   }
   return given;
 };
