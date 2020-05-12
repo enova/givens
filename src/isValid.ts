@@ -12,11 +12,7 @@ const disallowedProps = [
   '__cache__',
   '__trace__',
   // prototype props
-  ...allProps(
-    // this is a noop function so the contents do not need to be covered
-    /* istanbul ignore next */
-    () => undefined,
-  ),
+  ...allProps(Function.prototype),
 ];
 
 const isValid = (key: string): boolean => !disallowedProps.includes(key);
