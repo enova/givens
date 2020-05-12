@@ -27,7 +27,29 @@ jobs:
     - name: test
       run: npm test
       
-    - name: coveralls
-      uses: coverallsapp/github-action@master
+    - name: upload unit coverage
+      uses: codecov/codecov-action@v1
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.codecov_token }}
+        file: ./coverage/lcov.info
+        flags: unit
+        name: unit tests
+        fail_ci_if_error: true
+
+    - name: upload mocha integration coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.codecov_token }}
+        file: ./build/coverage/javascript/mocha/lcov.info
+        flags: integration mocha javascript
+        name: mocha js integration tests
+        fail_ci_if_error: true
+
+    - name: upload jasmine integration coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.codecov_token }}
+        file: ./build/coverage/javascript/jasmine/lcov.info
+        flags: integration jasmine javascript
+        name: jasmine js integration tests
+        fail_ci_if_error: true

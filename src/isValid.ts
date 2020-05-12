@@ -13,7 +13,6 @@ const disallowedProps = [
   '__trace__',
   // prototype props
   ...allProps(
-    /* istanbul ignore next */
     () => undefined,
   ),
 ];

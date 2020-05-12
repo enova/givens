@@ -75,6 +75,7 @@
     "transform": {
       "^.+\\.ts$": "ts-jest"
     },
+    "coverageReporters": ["lcov"],
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/**/*.ts"

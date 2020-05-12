@@ -16,7 +16,6 @@ export default class GivenError extends Error {
 
     // If a start stack function (ssf) was provided we capture the current stack trace and pass
     // it to the `captureStackTrace` function so we can remove frames that come after it
-    /* istanbul ignore next */
     if ((Error as any).captureStackTrace) {
       (Error as any).captureStackTrace(this, ssf);
     }
