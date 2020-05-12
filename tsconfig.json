@@ -5,6 +5,7 @@
     "module": "commonjs",
     "declaration": false,
     "sourceMap": true,
+    "removeComments": true,
     "outDir": "./build/tsc",
     "strict": true
   },
