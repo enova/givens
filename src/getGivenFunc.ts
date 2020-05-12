@@ -67,6 +67,7 @@ const getGivenFunc = () => {
       after(`givens teardown ${key}`, pop);
     }
   };
+  /* istanbul ignore else */
   if (typeof afterEach === 'function') {
     // clear the cache after every test
     afterEach(() => {
