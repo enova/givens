@@ -25,11 +25,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@master
+        with:
+          persist-credentials: true
 
       - name: Set up Node.js
         uses: actions/setup-node@master
         with:
           node-version: 12.x
+          
+      - name: Set git name
+        run: git config --global user.name "GitHub Actions"
+      
+      - name: Set git email
+        run: git config --global user.email "actions@github.com"
       
       - name: Set up npm
         run: npm config set sign-git-tag true
