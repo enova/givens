@@ -38,9 +38,6 @@ jobs:
       
       - name: Set git email
         run: git config --global user.email "actions@github.com"
-      
-      - name: Set up npm
-        run: npm config set sign-git-tag true
 
       - name: Bump npm version
         run: npm version ${{ github.event.inputs.type }} 
