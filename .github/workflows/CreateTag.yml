@@ -32,12 +32,15 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: 12.x
-          
-      - name: Set git name
-        run: git config --global user.name "GitHub Actions"
-      
-      - name: Set git email
-        run: git config --global user.email "actions@github.com"
 
       - name: Bump npm version
-        run: npm version ${{ github.event.inputs.type }} 
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          npm version ${{ github.event.inputs.type }}
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tags: true
