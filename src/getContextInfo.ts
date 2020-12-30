@@ -46,7 +46,7 @@ function mochaContextMatcher(rawStack: string): ContextInfo | undefined {
 }
 
 function jasmineContextMatcher(rawStack: string): ContextInfo | undefined {
-  if (!/jasmine\.js/.test(rawStack)) {
+  if (!/(jasmine\.js|jasmine\/lib\/loader\.js)/.test(rawStack)) {
     return undefined;
   }
   if (!/Env\.describe/.test(rawStack)) {
