@@ -23,10 +23,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@master
+      - uses: actions/checkout@v2
         with:
-          persist-credentials: true
+          token: ${{ secrets.push_token }}
 
       - name: Set up Node.js
         uses: actions/setup-node@master
@@ -35,12 +34,7 @@ jobs:
 
       - name: Bump npm version
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --global user.name "GitHub Action"
+          git config --global user.email "maboesanman@users.noreply.github.com"
           npm version ${{ github.event.inputs.type }}
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.push_token }}
-          tags: true
+          git push
