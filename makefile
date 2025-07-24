@@ -17,7 +17,7 @@ MAP_FILE_NAMES = $(addsuffix .js.map,$(SOURCE_NAMES))
 SOURCE_FILES = $(addprefix src/,$(TS_FILE_NAMES))
 TSC_OUT_FILES = $(addprefix $(BUILD_DIR)/tsc/,$(JS_FILE_NAMES) $(MAP_FILE_NAMES))
 DIST_FILES = $(addprefix dist/,$(JS_FILE_NAMES)) dist/getGiven.d.ts
-PACKAGE_FILES = $(addprefix $(BUILD_DIR)/package/,$(DIST_FILES) LICENSE package.json README.md setup.js)
+PACKAGE_FILES = $(addprefix $(BUILD_DIR)/package/,$(DIST_FILES) LICENSE.txt package.json README.md setup.js)
 INSTRUMENTED_FILES = $(addprefix $(BUILD_DIR)/instrumented/dist/,$(JS_FILE_NAMES))
 
 #===============
