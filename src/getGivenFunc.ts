@@ -54,30 +54,45 @@ const getGivenFunc = () => {
       }
     };
 
+    let testRunnerBeforeAll: (f: () => void) => void;
+    let testRunnerAfterAll: (f: () => void) => void;
+
     if (typeof beforeAll === 'function') {
-      beforeAll(push);
+      testRunnerBeforeAll = beforeAll;
     } else if (typeof before === 'function') {
-      before(`givens setup ${key}`, push);
+      testRunnerBeforeAll = (f: () => void) => before(`givens setup ${key}`, f)
     } else {
       throw new GivenError('no test runner found', given);
     }
 
     if (typeof afterAll === 'function') {
-      afterAll(pop);
+      testRunnerAfterAll = afterAll;
     } else if (typeof after === 'function') {
-      after(`givens teardown ${key}`, pop);
+      testRunnerAfterAll = (f: () => void) => after(`givens teardown ${key}`, f);
     } else {
       throw new GivenError('no test runner found', given);
     }
+
+    try {
+      testRunnerBeforeAll(push)
+      testRunnerAfterAll(pop)
+    } catch(e) {
+      console.log(e);
+      throw new GivenError('cannot call given from a test or lifecycle hook', given);
+    }
   };
   if (typeof afterEach === 'function') {
-    // clear the cache after every test
-    afterEach(() => {
-      const cache = (given as any).__cache__;
-      Object.keys(cache).forEach((key: any) => {
-        delete cache[key];
+    try {
+      // clear the cache after every test
+      afterEach(() => {
+        const cache = (given as any).__cache__;
+        Object.keys(cache).forEach((key: any) => {
+          delete cache[key];
+        });
       });
-    });
+    } catch(e) {
+      throw new GivenError('cannot call given from a test or lifecycle hook', given);
+    }
   } else {
     throw new GivenError('no test runner found', getGivenFunc);
   }

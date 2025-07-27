@@ -49,7 +49,7 @@ function jasmineContextMatcher(rawStack: string): ContextInfo | undefined {
   if (!/(jasmine\.js|jasmine\/lib\/loader\.js)/.test(rawStack)) {
     return undefined;
   }
-  if (!/Env\.describe/.test(rawStack)) {
+  if (!/Env\.describe|Env\/this.describe/.test(rawStack)) {
     return {
       allowed: false,
       message: 'given must be called inside a describe',
@@ -67,7 +67,7 @@ export default function getContextInfo(ssf: Function): ContextInfo {
     }
     throw err;
   } catch (e) {
-    rawStack = e.stack;
+    rawStack = (e as any).stack;
   }
   let context: ContextInfo | undefined;
 
