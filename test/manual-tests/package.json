@@ -7,7 +7,7 @@
     "preinstall": "cd ../../ && make package"
   },
   "devDependencies": {
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "givens": "file:../../build/package",
     "nyc": "^15.1.0"
   },
